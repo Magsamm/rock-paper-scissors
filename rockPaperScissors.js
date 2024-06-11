@@ -1,6 +1,6 @@
 //global variables to keep track of the score for the human and computer.
-humanScore = 0;
-computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 //gets a random int and adds rock paper or scissors to an empty string and returns it
 //depending on the number it returns, from 0-2
@@ -26,13 +26,50 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-//getHumanChoice
+//getHumanChoice prompts user for valid input.
 function getHumanChoice() {
-  userInput = prompt("Enter rock, paper or scissors").toLowerCase();
+  //declare  userInput;
+  let userInput = "";
+  userInput = prompt("Enter rock, paper or scissors")
   //run loop until user inputs a valid choice.
   while (userInput != "rock" && userInput != "paper" && userInput != "scissors")
-    userInput = prompt("Enter rock, paper or scissors").toLowerCase();
-
-  return userInput;
+    userInput = prompt("Error! Please enter rock, paper or scissors.")
+  return userInput.toLowerCase();
 }
-console.log(getHumanChoice());
+
+//playRound()
+function playRound(humanChoice, computerChoice) {
+  //playRound logic goes here.
+  //take human and computer choices and play round.
+  //increment the winner's score
+  //announce winner with console.log()
+  //maybe increment human if won, otherwise increment computerScore?
+  if (humanChoice === "rock" && computerChoice === "scissors") {
+    humanScore++;
+  } else if (humanChoice === "paper" && computerChoice === "rock") {
+    humanScore++;
+  } else if (humanChoice === "scissors" && computerChoice === "paper") { 
+    humanScore++;
+  }
+//computer score block, definitely needs refactoring
+  if (computerChoice === "rock" && humanChoice === "scissors") {
+    humanScore++;
+  } else if (computerChoice === "paper" && humanChoice === "rock") {
+    humanScore++;
+  } else if (computerChoice === "scissors" && humanChoice === "paper") {
+    computerScore++;
+  }
+  return;
+}
+//console log the winner
+//if computerScore < humanScore, print humanSelection as winner,
+//else print computer as winner?
+//remember to also have logic for tie.
+// ${humanSelection} to plug value into the console.log()
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+playRound(humanSelection, computerSelection);
+console.log("Human score" + ": " + humanScore);
+console.log("computer score" + ": " + computerScore);
+
+
