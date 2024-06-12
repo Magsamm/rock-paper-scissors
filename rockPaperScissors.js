@@ -30,46 +30,48 @@ function getComputerChoice() {
 function getHumanChoice() {
   //declare  userInput;
   let userInput = "";
-  userInput = prompt("Enter rock, paper or scissors")
+  userInput = window.prompt("Enter rock, paper or scissors");
   //run loop until user inputs a valid choice.
   while (userInput != "rock" && userInput != "paper" && userInput != "scissors")
-    userInput = prompt("Error! Please enter rock, paper or scissors.")
+    userInput = window.prompt("Error! Please enter rock, paper or scissors.");
   return userInput.toLowerCase();
 }
 
 //playRound()
 function playRound(humanChoice, computerChoice) {
   //playRound logic goes here.
-  //take human and computer choices and play round.
-  //increment the winner's score
-  //announce winner with console.log()
-  //maybe increment human if won, otherwise increment computerScore?
-  if (humanChoice === "rock" && computerChoice === "scissors") {
-    humanScore++;
-  } else if (humanChoice === "paper" && computerChoice === "rock") {
-    humanScore++;
-  } else if (humanChoice === "scissors" && computerChoice === "paper") { 
-    humanScore++;
+  // remember to add tie logic
+  if (
+    (computerChoice === "rock" && humanChoice === "rock") ||
+    (computerChoice === "paper" && humanChoice === "paper") ||
+    (computerChoice === "scissors" && humanChoice === "scissors")
+  ) {
+    return console.log("It's a tie!");
+    // human will logic.
+  } else if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+  ) {
+    console.log(`You win! ${humanChoice}. beats ${computerChoice}`);
+    return humanScore++;
   }
-//computer score block, definitely needs refactoring
-  if (computerChoice === "rock" && humanChoice === "scissors") {
-    humanScore++;
-  } else if (computerChoice === "paper" && humanChoice === "rock") {
-    humanScore++;
-  } else if (computerChoice === "scissors" && humanChoice === "paper") {
-    computerScore++;
+
+  //computer score block, definitely needs refactoring
+  if (
+    (computerChoice === "rock" && humanChoice === "scissors") ||
+    (computerChoice === "paper" && humanChoice === "rock") ||
+    (computerChoice === "scissors" && humanChoice === "paper")
+  ) {
+    console.log(`The computer wins! ${computerChoice}. beats ${humanChoice}`);
+    return computerScore++;
   }
+
   return;
 }
-//console log the winner
-//if computerScore < humanScore, print humanSelection as winner,
-//else print computer as winner?
-//remember to also have logic for tie.
-// ${humanSelection} to plug value into the console.log()
+//call functions to play 1 round.
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 playRound(humanSelection, computerSelection);
 console.log("Human score" + ": " + humanScore);
 console.log("computer score" + ": " + computerScore);
-
-
