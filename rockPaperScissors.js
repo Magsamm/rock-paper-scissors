@@ -1,9 +1,8 @@
 //global variables to keep track of the score for the human and computer.
-let humanScore = 0;
-let computerScore = 0;
-
 //gets a random int and adds rock paper or scissors to an empty string and returns it
 //depending on the number it returns, from 0-2
+let humanScore = 0;
+let computerScore = 0;
 function getComputerChoice() {
   //store rock paper or scissors in empty string based on randomInt return value
   let computerChoice = "";
@@ -37,36 +36,41 @@ function getHumanChoice() {
   return userInput.toLowerCase();
 }
 
-//refactor to use switch statements here too?
-function playRound(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    console.log("It's a tie!");
+//put playRound inside playGame.
+function playGame(humanChoice, computerChoice) {
+  //maybe i need to rework my humanChoice function for easier ways to reprompt?
+  //Re-work your previous functions or create more helper functions if necessary.
+  //Specifically, you may want to change the return values to something more useful.
+  function playRound(humanChoice, computerChoice) {
+    //tie logic
+    if (humanChoice === computerChoice) {
+      console.log("It's a tie!");
 
-    // human win logic.
-  } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
-  ) {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-    humanScore++;
-  }
+      // human win logic.
+    } else if (
+      (humanChoice === "rock" && computerChoice === "scissors") ||
+      (humanChoice === "paper" && computerChoice === "rock") ||
+      (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+      console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+      humanScore++;
+    }
 
-  //computer score block, definitely needs refactoring
-  else {
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-    computerScore++;
+    //computer win block
+    else {
+      console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+      computerScore++;
+    }
     return;
   }
-}
-//call functions to play 1 round.
-function playGame(humanChoice, computerChoice) {
+  //call playRound
   playRound(humanChoice, computerChoice);
 }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 playGame(humanSelection, computerSelection);
+//log to see stuff is working
 console.log("Human :" + humanSelection);
 console.log("computer :" + computerSelection);
 console.log("Human score" + ": " + humanScore);
