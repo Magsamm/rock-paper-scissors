@@ -56,6 +56,7 @@ function playRound(humanChoice, computerChoice) {
   else {
     console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
     computerScore++;
+    return;
   }
 }
 //call functions to play 1 round.
