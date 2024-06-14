@@ -37,36 +37,30 @@ function getHumanChoice() {
   return userInput.toLowerCase();
 }
 
+//playRound()
 //refactor to use switch statements here too?
 function playRound(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    console.log("It's a tie!");
-
-    // human win logic.
-  } else if (
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "paper" && computerChoice === "rock") ||
-    (humanChoice === "scissors" && computerChoice === "paper")
-  ) {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-    humanScore++;
+  //tie logic
+  switch ((humanChoice = computerChoice)) {
+    case "rock":
+      console.log("Its a tie!");
+      return;
+    case "paper":
+      console.log("Its a tie!");
+      return;
+    case "scissors":
+      console.log("Its a tie!");
+      return;
   }
+  //human win logic
 
-  //computer score block, definitely needs refactoring
-  else {
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-    computerScore++;
-  }
+  return humanChoice, computerChoice;
 }
 //call functions to play 1 round.
-function playGame(humanChoice, computerChoice) {
-  playRound(humanChoice, computerChoice);
-}
-
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
-playGame(humanSelection, computerSelection);
-console.log("Human :" + humanSelection);
-console.log("computer :" + computerSelection);
+playRound(humanSelection, computerSelection);
+console.log("human " + humanSelection);
+console.log("computer  " + computerSelection);
 console.log("Human score" + ": " + humanScore);
 console.log("computer score" + ": " + computerScore);
