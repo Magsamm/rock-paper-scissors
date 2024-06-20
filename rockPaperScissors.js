@@ -43,11 +43,11 @@ function getHumanChoice() {
     return userInput.toLowerCase();
 }
 
-//round win function that starts a new round if all conditions are met AND roundCounter < 5.
-//start new round and get new choices.
+//start new round and get new choices if roundCounter < 5.
 //else run gameWin() function.
 function roundOver() {
     if (roundCounter < 5) {
+        //update roundCounter after every round.
         roundCounter++;
         playRound(getHumanChoice(), getComputerChoice());
     } else {
@@ -89,13 +89,11 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function gameWin() {
-    // if roundCounter >= 5 AND humanScore is higher than computerScore, game over,  present winner.
-    //need to break out of game loop somehow.
-    //or just call this function once roundCounter reaches >=5?
+    // print winner based on score, or neither if tie.
     if (roundCounter >= 5 && humanScore > computerScore) {
         console.log("You Win! You have: " + humanScore + " points!");
     } else if (roundCounter >= 5 && humanScore === computerScore) {
-        console.log("Neither won the game! It's a tie");
+        console.log("Neither won the game! It's a tie!");
     } else {
         console.log(
             "You lose! The CPU wins! CPU has: " + computerScore + " points!"
