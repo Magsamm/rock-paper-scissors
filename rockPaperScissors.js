@@ -44,7 +44,8 @@ function getHumanChoice() {
 }
 
 //round win function that starts a new round if all conditions are met AND roundCounter < 5.
-//start new round and get new choices... hmmm
+//start new round and get new choices.
+//else run gameWin() function.
 function roundOver() {
     if (roundCounter < 5) {
         playRound(getHumanChoice(), getComputerChoice());
@@ -53,15 +54,14 @@ function roundOver() {
     }
 }
 
-//they want you to recall both choice function, humanSelection and computerSelection between rounds.
-//while
+//playRound function to play a round.
+//increments roundCounter when a round is "done"
 function playRound(humanChoice, computerChoice) {
     //tie logic
 
     if (humanChoice === computerChoice) {
-        roundCounter++;
         console.log("This round is a tie!");
-
+        roundCounter++;
         roundOver();
 
         // human win logic.
