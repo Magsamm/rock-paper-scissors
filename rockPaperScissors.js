@@ -33,16 +33,14 @@ function getComputerChoice() {
 function getHumanChoice() {
     //declare  userInput;
     let userInput = "";
-    userInput = window.prompt("Enter rock, paper or scissors");
+    userInput = prompt("Enter rock, paper or scissors");
     //run loop until user inputs a valid choice.
     while (
         userInput != "rock" &&
         userInput != "paper" &&
         userInput != "scissors"
     ) {
-        userInput = window.prompt(
-            "Error! Please enter rock, paper or scissors."
-        );
+        userInput = prompt("Error! Please enter rock, paper or scissors.");
     }
 
     return userInput.toLowerCase();
@@ -52,7 +50,7 @@ function getHumanChoice() {
 //start new round and get new choices... hmmm
 function roundOver() {
     if (roundCounter < 5) {
-        playRound(humanSelection, computerSelection);
+        playRound(getHumanChoice(), getComputerChoice());
     } else {
         gameWin();
     }
@@ -64,7 +62,7 @@ function roundOver() {
 function playRound(humanChoice, computerChoice) {
     //tie logic
     //check if roundCounter < 5?
-    if (humanChoice === computerChoice && roundCounter < 5) {
+    if (humanChoice === computerChoice) {
         roundCounter++;
         console.log("This round is a tie!");
         roundOver();
@@ -90,7 +88,6 @@ function playRound(humanChoice, computerChoice) {
         console.log(
             `You lose this round. ${computerChoice} beats ${humanChoice}!`
         );
-        roundOver();
     }
 }
 
