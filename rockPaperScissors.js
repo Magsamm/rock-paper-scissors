@@ -56,10 +56,8 @@ function roundOver() {
 }
 
 //playRound function to play a round.
-//increments roundCounter when a round is "done"
+//takes input from getHumanChoice and computerChoice as arguments.
 function playRound(humanChoice, computerChoice) {
-    //tie logic
-
     if (humanChoice === computerChoice) {
         console.log("This round is a tie!");
 
