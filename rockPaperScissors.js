@@ -51,14 +51,13 @@ function roundOver() {
     } else {
         gameWin();
     }
-    //call gameWin once counter reaches 5?
 }
 
 //they want you to recall both choice function, humanSelection and computerSelection between rounds.
 //while
 function playRound(humanChoice, computerChoice) {
     //tie logic
-    //check if roundCounter < 5?
+
     if (humanChoice === computerChoice) {
         roundCounter++;
         console.log("This round is a tie!");
@@ -106,11 +105,7 @@ function gameWin() {
 }
 
 function playGame() {
-    //if gameWin or roundWin = true?
-    // roundWin();
     playRound(getHumanChoice(), getComputerChoice());
 }
-
+//start game
 playGame();
-
-// function to call playGame 5 times
