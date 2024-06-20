@@ -60,7 +60,6 @@ function roundOver() {
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         console.log("This round is a tie!");
-
         roundOver();
 
         // human win logic.
