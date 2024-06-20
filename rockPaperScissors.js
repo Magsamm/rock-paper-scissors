@@ -3,9 +3,6 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundCounter = 0;
-//store human and computer selections in a const
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
 function getComputerChoice() {
     //store rock paper or scissors in empty string based on randomInt return value
@@ -65,6 +62,7 @@ function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         roundCounter++;
         console.log("This round is a tie!");
+
         roundOver();
 
         // human win logic.
@@ -88,6 +86,7 @@ function playRound(humanChoice, computerChoice) {
         console.log(
             `You lose this round. ${computerChoice} beats ${humanChoice}!`
         );
+        roundOver();
     }
 }
 
@@ -97,7 +96,7 @@ function gameWin() {
     //or just call this function once roundCounter reaches >=5?
     if (roundCounter >= 5 && humanScore > computerScore) {
         console.log("You Win! You have: " + humanScore + " points!");
-    } else if (roundCounter >= 5) {
+    } else if (roundCounter >= 5 && computerScore > humanScore) {
         console.log(
             "You lose! The CPU wins! CPU has: " + computerScore + " points!"
         );
@@ -107,7 +106,7 @@ function gameWin() {
 function playGame() {
     //if gameWin or roundWin = true?
     // roundWin();
-    playRound(humanSelection, computerSelection);
+    playRound(getHumanChoice(), getComputerChoice());
 }
 
 playGame();
