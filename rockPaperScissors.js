@@ -96,7 +96,9 @@ function gameWin() {
     //or just call this function once roundCounter reaches >=5?
     if (roundCounter >= 5 && humanScore > computerScore) {
         console.log("You Win! You have: " + humanScore + " points!");
-    } else if (roundCounter >= 5 && computerScore > humanScore) {
+    } else if (roundCounter >= 5 && humanScore === computerScore) {
+        console.log("Neither won the game! It's a tie");
+    } else {
         console.log(
             "You lose! The CPU wins! CPU has: " + computerScore + " points!"
         );
@@ -110,10 +112,5 @@ function playGame() {
 }
 
 playGame();
-//call roundWin
-//call playGame
-console.log("humanScore: " + humanScore);
-console.log("computerScore: " + computerScore);
-console.log("roundCounter " + roundCounter);
 
 // function to call playGame 5 times
