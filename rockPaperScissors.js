@@ -25,7 +25,7 @@ function getComputerChoice() {
     }
     return computerChoice;
 }
-
+//refactor to use button instead of prompt
 //getHumanChoice prompts user for valid input.
 function getHumanChoice() {
     //declare  userInput;
