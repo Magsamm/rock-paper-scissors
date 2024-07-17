@@ -21,9 +21,6 @@ scissors.setAttribute("id", "scissors");
 scissors.textContent = "Scissors";
 container.appendChild(scissors);
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
 function getComputerChoice() {
     //store rock paper or scissors in empty string based on randomInt return value
     let computerChoice = "";
@@ -48,7 +45,7 @@ function getComputerChoice() {
 //refactor to use button instead of prompt
 //getHumanChoice prompts user for valid input.
 function getHumanChoice() {
-    // const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll("button");
 
     // we use the .forEach method to iterate through each button
     buttons.forEach((button) => {
@@ -126,9 +123,8 @@ function gameWin() {
 }
 
 function playGame() {
-    playRound(humanSelection, computerSelection);
+    playRound(getHumanChoice(), getComputerChoice());
 }
 
 //start game
 playGame();
-console.log(humanSelection);
