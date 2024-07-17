@@ -3,6 +3,26 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundCounter = 1;
+const container = document.querySelector("#container");
+const buttons = document.querySelectorAll("button");
+const rock = document.createElement("button");
+rock.textContent = "Rock";
+rock.setAttribute("id", "rock");
+container.appendChild(rock);
+// Create three buttons, one for each selection. Add an event listener to the buttons that call your playRound function with the correct playerSelection every time a button is clicked. (you can keep the console.logs for this step)
+
+const paper = document.createElement("button");
+paper.textContent = "Paper";
+paper.setAttribute("id", "paper");
+container.appendChild(paper);
+
+const scissors = document.createElement("button");
+scissors.setAttribute("id", "scissors");
+scissors.textContent = "Scissors";
+container.appendChild(scissors);
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
 function getComputerChoice() {
     //store rock paper or scissors in empty string based on randomInt return value
@@ -28,19 +48,26 @@ function getComputerChoice() {
 //refactor to use button instead of prompt
 //getHumanChoice prompts user for valid input.
 function getHumanChoice() {
-    //declare  userInput;
-    let userInput = "";
-    userInput = prompt("Enter rock, paper or scissors");
-    //run loop until user inputs a valid choice.
-    while (
-        userInput != "rock" &&
-        userInput != "paper" &&
-        userInput != "scissors"
-    ) {
-        userInput = prompt("Error! Please enter rock, paper or scissors.");
-    }
+    // const buttons = document.querySelectorAll("button");
 
-    return userInput.toLowerCase();
+    // we use the .forEach method to iterate through each button
+    buttons.forEach((button) => {
+        // and for each one we add a 'click' listener
+        //omg you fucking idiot.
+        //your button is supposed to call playround()
+        button.addEventListener("click", () => {
+            let userSelection = "";
+            if (button.id === "rock") {
+                userSelection += "rock";
+            } else if (button.id === "paper") {
+                userSelection += "paper";
+            } else {
+                userSelection += "scissors";
+            }
+
+            return userSelection;
+        });
+    });
 }
 
 //start new round and get new choices if roundCounter < 5.
@@ -58,30 +85,28 @@ function roundOver() {
 //playRound function to play a round.
 //takes input from getHumanChoice and computerChoice as arguments.
 function playRound(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
+    const btn = document.querySelector("button");
+    if (btn.id === computerChoice) {
         console.log("This round is a tie!");
-        roundOver();
+
+        //roundOver();
 
         // human win logic.
     } else if (
-        (humanChoice === "rock" && computerChoice === "scissors") ||
-        (humanChoice === "paper" && computerChoice === "rock") ||
-        (humanChoice === "scissors" && computerChoice === "paper")
+        (btn.id === "rock" && computerChoice === "scissors") ||
+        (btn.id === "paper" && computerChoice === "rock") ||
+        (btn.id === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        console.log(
-            `You win this round! ${humanChoice} beats ${computerChoice}.`
-        );
-        roundOver();
+        console.log(`You win this round! ${btn.id} beats ${computerChoice}.`);
+        //roundOver();
     }
 
     //computer win block
     else {
         computerScore++;
-        console.log(
-            `You lose this round. ${computerChoice} beats ${humanChoice}!`
-        );
-        roundOver();
+        console.log(`You lose this round. ${computerChoice} beats ${btn.id}!`);
+        //roundOver();
     }
 }
 
@@ -93,13 +118,17 @@ function gameWin() {
         console.log("Neither won the game! It's a tie!");
     } else {
         console.log(
-            "You lose! The CPU wins! CPU has: " + computerScore + " points!"
+            "You lose the game! The CPU wins! CPU has: " +
+                computerScore +
+                " points!"
         );
     }
 }
 
 function playGame() {
-    playRound(getHumanChoice(), getComputerChoice());
+    playRound(humanSelection, computerSelection);
 }
+
 //start game
 playGame();
+console.log(humanSelection);
