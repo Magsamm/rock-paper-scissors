@@ -4,7 +4,6 @@ let humanScore = 0;
 let computerScore = 0;
 let roundCounter = 1;
 const container = document.querySelector("#container");
-const buttons = document.querySelectorAll("button");
 const rock = document.createElement("button");
 rock.textContent = "Rock";
 rock.setAttribute("id", "rock");
@@ -42,33 +41,22 @@ function getComputerChoice() {
     }
     return computerChoice;
 }
-//refactor to use button instead of prompt
-//getHumanChoice prompts user for valid input.
-function getHumanChoice() {
-    const buttons = document.querySelectorAll("button");
-
-    // we use the .forEach method to iterate through each button
-    buttons.forEach((button) => {
-        // and for each one we add a 'click' listener
-        //omg you fucking idiot.
-        //your button is supposed to call playround()
-        button.addEventListener("click", () => {
-            let userSelection = "";
-            if (button.id === "rock") {
-                userSelection += "rock";
-            } else if (button.id === "paper") {
-                userSelection += "paper";
-            } else {
-                userSelection += "scissors";
-            }
-
-            return userSelection;
-        });
+const buttons = document.querySelectorAll("button");
+let userInput = "";
+buttons.forEach((button) => {
+    // and for each one we add a 'click' listener
+    //omg you fucking idiot.
+    //your button is supposed to call playRound()
+    button.addEventListener("click", () => {
+        playRound(button.id, getComputerChoice());
+        userInput += button.id;
     });
+});
+
+function getHumanChoice() {
+    return userInput;
 }
 
-//start new round and get new choices if roundCounter < 5.
-//else run gameWin() function.
 function roundOver() {
     if (roundCounter < 5) {
         //update roundCounter after every round.
@@ -78,10 +66,15 @@ function roundOver() {
         gameWin();
     }
 }
+// div to display results from playRound
+const resultDiv = document.createElement("div");
+resultDiv.classList.add("resultDiv");
+resultDiv.textContent = "results";
+container.appendChild(resultDiv);
 
-//playRound function to play a round.
-//takes input from getHumanChoice and computerChoice as arguments.
 function playRound(humanChoice, computerChoice) {
+    // display results using DOM methods
+    const content = document.createElement("div");
     const btn = document.querySelector("button");
     if (btn.id === computerChoice) {
         console.log("This round is a tie!");
@@ -95,7 +88,8 @@ function playRound(humanChoice, computerChoice) {
         (btn.id === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        console.log(`You win this round! ${btn.id} beats ${computerChoice}.`);
+        content.textContent = `You win this round! ${btn.id} beats ${computerChoice}.`;
+        resultDiv.append(content);
         //roundOver();
     }
 
@@ -121,10 +115,3 @@ function gameWin() {
         );
     }
 }
-
-function playGame() {
-    playRound(getHumanChoice(), getComputerChoice());
-}
-
-//start game
-playGame();
