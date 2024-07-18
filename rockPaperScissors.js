@@ -53,50 +53,43 @@ buttons.forEach((button) => {
     });
 });
 
-function getHumanChoice() {
-    return userInput;
-}
-
 function roundOver() {
     if (roundCounter < 5) {
         //update roundCounter after every round.
         roundCounter++;
-        playRound(getHumanChoice(), getComputerChoice());
+        playRound(userInput, getComputerChoice());
     } else {
         gameWin();
     }
 }
 // div to display results from playRound
-const resultDiv = document.createElement("div");
-resultDiv.classList.add("resultDiv");
-resultDiv.textContent = "results";
-container.appendChild(resultDiv);
+const content = document.createElement("div");
 
 function playRound(humanChoice, computerChoice) {
     // display results using DOM methods
-    const content = document.createElement("div");
-    const btn = document.querySelector("button");
-    if (btn.id === computerChoice) {
-        console.log("This round is a tie!");
+    if (humanChoice === computerChoice) {
+        content.textContent = "It's a tie!";
 
         //roundOver();
 
         // human win logic.
     } else if (
-        (btn.id === "rock" && computerChoice === "scissors") ||
-        (btn.id === "paper" && computerChoice === "rock") ||
-        (btn.id === "scissors" && computerChoice === "paper")
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        content.textContent = `You win this round! ${btn.id} beats ${computerChoice}.`;
-        resultDiv.append(content);
+        content.textContent = `You win this round! ${humanChoice} beats ${computerChoice}.`;
+
         //roundOver();
     }
 
     //computer win block
     else {
         computerScore++;
-        console.log(`You lose this round. ${computerChoice} beats ${btn.id}!`);
+
+        content.textContent = `You lose this round. ${computerChoice} beats ${humanChoice}!`;
+
         //roundOver();
     }
 }
@@ -104,14 +97,14 @@ function playRound(humanChoice, computerChoice) {
 function gameWin() {
     // print winner based on score, or neither if tie.
     if (roundCounter >= 5 && humanScore > computerScore) {
-        console.log("You Win! You have: " + humanScore + " points!");
+        content.textContent = "You Win! You have: " + humanScore + " points!";
     } else if (roundCounter >= 5 && humanScore === computerScore) {
         console.log("Neither won the game! It's a tie!");
     } else {
-        console.log(
+        content.textContent =
             "You lose the game! The CPU wins! CPU has: " +
-                computerScore +
-                " points!"
-        );
+            computerScore +
+            " points!";
     }
 }
+container.append(content);
