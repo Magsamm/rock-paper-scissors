@@ -44,9 +44,6 @@ function getComputerChoice() {
 const buttons = document.querySelectorAll("button");
 let userInput = "";
 buttons.forEach((button) => {
-    // and for each one we add a 'click' listener
-    //omg you fucking idiot.
-    //your button is supposed to call playRound()
     button.addEventListener("click", () => {
         playRound(button.id, getComputerChoice());
         userInput += button.id;
@@ -57,7 +54,6 @@ function roundOver() {
     if (roundCounter < 5) {
         //update roundCounter after every round.
         roundCounter++;
-        playRound(userInput, getComputerChoice());
     } else {
         gameWin();
     }
@@ -68,9 +64,9 @@ const content = document.createElement("div");
 function playRound(humanChoice, computerChoice) {
     // display results using DOM methods
     if (humanChoice === computerChoice) {
-        content.textContent = "It's a tie!";
+        content.textContent = `It's a tie! You have: ${humanScore} points! And the computer has ${computerScore} points!`;
 
-        //roundOver();
+        roundOver();
 
         // human win logic.
     } else if (
@@ -79,27 +75,26 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
         humanScore++;
-        content.textContent = `You win this round! ${humanChoice} beats ${computerChoice}.`;
-
-        //roundOver();
+        content.textContent = `You win this round! ${humanChoice} beats ${computerChoice}. You have: ${humanScore} points! And the computer has ${computerScore} points!`;
+        roundOver();
     }
 
     //computer win block
     else {
         computerScore++;
 
-        content.textContent = `You lose this round. ${computerChoice} beats ${humanChoice}!`;
-
-        //roundOver();
+        content.textContent = `You lose this round. ${computerChoice} beats ${humanChoice}! You have ${humanScore} points! The computer has ${computerScore} points!`;
+        roundOver();
     }
 }
 
 function gameWin() {
     // print winner based on score, or neither if tie.
     if (roundCounter >= 5 && humanScore > computerScore) {
-        content.textContent = "You Win! You have: " + humanScore + " points!";
+        content.textContent =
+            "You won the game! You have: " + humanScore + " points!";
     } else if (roundCounter >= 5 && humanScore === computerScore) {
-        console.log("Neither won the game! It's a tie!");
+        content.textContent = "Neither won the game, it's a draw!";
     } else {
         content.textContent =
             "You lose the game! The CPU wins! CPU has: " +
@@ -107,4 +102,5 @@ function gameWin() {
             " points!";
     }
 }
+//append content to container to display results.
 container.append(content);
