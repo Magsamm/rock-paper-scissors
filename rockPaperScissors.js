@@ -91,8 +91,7 @@ function playRound(humanChoice, computerChoice) {
 function gameWin() {
     // print winner based on score, or neither if tie.
     if (roundCounter >= 5 && humanScore > computerScore) {
-        content.textContent =
-            "You won the game! You have: " + humanScore + " points!";
+        content.textContent = `You won the game! You have: ${humanScore} points!``the CPU had: + ${computerScore} points`;
     } else if (roundCounter >= 5 && humanScore === computerScore) {
         content.textContent = "Neither won the game, it's a draw!";
     } else {
